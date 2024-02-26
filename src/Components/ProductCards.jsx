@@ -1,12 +1,22 @@
 import React from 'react'
-
+import {useSelector,useDispatch} from 'react-redux';
 import ProductData from '../ProductData';
+import { addToCart } from '../Features/cartSlice';
 
 function ProductCards() {
+
+    const items = useSelector((state)=>state.allcart.items)
+
+    const addItemDispatch = useDispatch();
+
+
+    const handleAddtoCart=(item)=>{
+        addItemDispatch(addToCart(item))
+    }
   return (
     <>
     <div className='grid grid-cols-3 gap-4 w-full max-w-7xl mx-auto mt-12'>
-        {ProductData.map((item,id)=>{
+        {items.map((item,id)=>{
             return(
                 <div className="w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-zinc-80 dark:border-gray-700 "key={id}>
         <a href="/">
@@ -73,6 +83,7 @@ function ProductCards() {
                 <button
                     
                     className="text-white bg-red-500 hover:bg-red-400  font-medium rounded-lg text-sm px-5 py-2.5 text-center "
+                    onClick={()=>handleAddtoCart(item)}
                 >
                     Add to cart
                 </button>
