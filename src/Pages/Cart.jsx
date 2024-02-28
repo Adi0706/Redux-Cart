@@ -9,7 +9,7 @@ import {decreaseItemQuantity} from '../Features/cartSlice';
 const Cart = () => {
   const { cart, totalPrice, totalQuantity } = useSelector((state) => state.allcart);
   const dispatch = useDispatch();
-  const removeDispatch = useDispatch();
+  
 
   useEffect(() => {
     dispatch(getCartTotal());

@@ -16,11 +16,15 @@ export const cartSlice = createSlice({
       const { id } = action.payload;
       const existingItemIndex = state.cart.findIndex((item) => item.id === id);
       if (existingItemIndex >= 0) {
-        state.cart[existingItemIndex].productQuantity += 1;
+        // Existing item found, add a new item with the same details
+        state.cart.push({ ...action.payload, productQuantity: 1 });
       } else {
+        // Item not found, simply add it to the cart
         state.cart.push({ ...action.payload, productQuantity: 1 });
       }
     },
+
+    
     getCartTotal: (state) => {
       let { totalQuantity, totalPrice } = state.cart.reduce(
         (cartTotal, cartItem) => {

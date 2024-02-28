@@ -1,18 +1,15 @@
 import React from 'react'
 import {useSelector,useDispatch} from 'react-redux';
-import ProductData from '../ProductData';
 import { addToCart } from '../Features/cartSlice';
 
 function ProductCards() {
 
     const items = useSelector((state)=>state.allcart.items)
 
-    const addItemDispatch = useDispatch();
+    const dispatch = useDispatch();
 
 
-    const handleAddtoCart=(item)=>{
-        addItemDispatch(addToCart(item))
-    }
+    
   return (
     <>
     <div className='grid grid-cols-3 gap-4 w-full max-w-7xl mx-auto mt-12'>
@@ -83,7 +80,7 @@ function ProductCards() {
                 <button
                     
                     className="text-white bg-red-500 hover:bg-red-400  font-medium rounded-lg text-sm px-5 py-2.5 text-center "
-                    onClick={()=>handleAddtoCart(item)}
+                    onClick={()=>dispatch(addToCart(item))}
                 >
                     Add to cart
                 </button>
