@@ -43,8 +43,12 @@ export const cartSlice = createSlice({
       state.totalQuantity = totalQuantity;
     },
     removeItem: (state, action) => {
-      state.cart = state.cart.filter((item) => item.id !== action.payload);
+      const index = state.cart.findIndex((item) => item.id === action.payload);
+      if (index !== -1) {
+        state.cart.splice(index, 1);
+      }
     },
+    
     incrementItemQuantity: (state, action) => {
       state.cart = state.cart.map((item) => {
         if (item.id === action.payload) {
